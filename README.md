@@ -47,7 +47,7 @@ The client package provides a client to deal with the registry from code. It is 
 ```go
 import "github.com/landoop/schema-registry"
 
-client, _ := schemaregistry.NewClient(schemaregistry.DefaultUrl)
+client, _ := schemaregistry.NewClient(schemaregistry.DefaultURL)
 client.Subjects()
 ```
 

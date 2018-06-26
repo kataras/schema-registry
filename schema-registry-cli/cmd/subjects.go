@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"fmt"
 	"log"
+	"sort"
 
 	"github.com/spf13/cobra"
 )
@@ -10,20 +10,21 @@ import (
 var subjectsCmd = &cobra.Command{
 	Use:   "subjects",
 	Short: "lists all registered subjects",
-	Long:  ``,
-	RunE: func(cmd *cobra.Command, args []string) error {
-		subs, err := assertClient().Subjects()
+	RunE: func(*cobra.Command, []string) error {
+		subs, err := client.Subjects()
 		if err != nil {
 			return err
 		}
+
 		log.Printf("there are %d subjects\n", len(subs))
+		sort.Strings(subs)
 		for _, s := range subs {
-			fmt.Println(s)
+			app.Print(s)
 		}
 		return nil
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(subjectsCmd)
+	app.AddCommand(subjectsCmd)
 }
